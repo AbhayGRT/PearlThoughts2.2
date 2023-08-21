@@ -12,12 +12,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Configure SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
       - name: Create text file on EC2 instance
         run: |
-          ssh -i ~/.ssh/id_rsa ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'echo "This is a text file" > /home/ubuntu/new_file.txt'
+          ssh -i ${{ secrets.SSH_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'echo "This is a text file" > /home/ubuntu/new_file.txt'
