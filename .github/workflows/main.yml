@@ -19,9 +19,12 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key.pem
           chmod 600 ~/.ssh/deploy_key.pem
 
+      - name: Change Working Directory
+        run: cd $GITHUB_WORKSPACE
+
       - name: Install Dependencies and Deploy
         run: |
-          ssh -i ~/.ssh/deploy_key.pem ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com "bash -s" < deploy_script.sh
+          ssh -i ~/.ssh/deploy_key.pem ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com "bash -s" < .github/deploy_script.sh
 
     env:
-      PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      YOUR_PRIVATE_KEY_SECRET_NAME: ${{ secrets.SSH_PRIVATE_KEY }}
