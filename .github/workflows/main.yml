@@ -15,4 +15,5 @@ jobs:
 
     - name: Run remote command
       run: |
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com "echo 'Hello from remote server'"
+        ssh -i "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCJrIldje9th4tl3cuLoSGEjs5yRiuAisS3TW1rAKR49u+Kv1JqV9wNyA3KtXdA7iYfPa6J67Lz8whBNJyn5xKf+O8EZB/xnvHOIfi+u99ZPeu6ZzhP/0y+Qcb7HMg+8YdeXt+uhcqv4QndYVfOpJvbkzzG9GiOVFgZTYFRRz/06yC77gmA46B0DatRh73KNw9Wyx3DD78lIs7AL0uyzBykxn3VRq06hoOeV+uYW6s10iJJxg4Vfe2QRDRV+8F/42dN7LlBG0enRa3FHVGVONS9SNF3EwbMMpU1R4cBWF8XNHaLxw91tRFQ0dKLgvzM/P55+wUjlfEwgkKmkotKYP5+zzh7sOcdC/lgTkp6qvkG1jbkdzGvRPO+kLbjKcyx6q8t7v+PiTA6dQpRlWNdzvhaV6yF+9mU54iahaa5u/BykZT5BC7cBcbbNC6o1pc/ZtRktt+HU2TsWs0ydr5LCKdolB1q4bLxT7a6z5dkS+QrUJFa6AAUvm7b+5kS6CVa2OM= abhay@abhay-XPS-15-7590" ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com
+        echo "Hello World"
