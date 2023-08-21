@@ -2,7 +2,7 @@ name: Create a text file in EC2 instance
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   run:
