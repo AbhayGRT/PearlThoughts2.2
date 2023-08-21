@@ -3,13 +3,21 @@ on:
   push:
     branches:
       - master
+
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Authenticate
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Configure SSH Key
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com
-      - name: Create text file
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Create text file on EC2 instance
         run: |
-          echo "This is a text file" > /home/ubuntu/new_file.txt
+          ssh -i ~/.ssh/id_rsa ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'echo "This is a text file" > /home/ubuntu/new_file.txt'
