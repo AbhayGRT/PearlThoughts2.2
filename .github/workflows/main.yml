@@ -13,11 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Configure SSH
-      uses: webfactory/ssh-agent@v0.5.2
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh-key-name: "github-actions-key"  # Replace with your chosen identifier
-
     - name: Run remote command
-      run: ssh ${{ secrets.SSH_USERNAME }} "echo Hello from remote server"
+      run: |
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com "echo 'Hello from remote server'"
