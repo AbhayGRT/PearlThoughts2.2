@@ -17,4 +17,4 @@ jobs:
 
       - name: SSH into AWS Instance
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-39-242 'ls -l'
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'ls -l'
