@@ -14,4 +14,9 @@ jobs:
 
       - name: Create text file on EC2 instance
         run: |
-          ssh -i ${{ secrets.SSH_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'echo "This is a text file" > /home/ubuntu/new_file.txt'
+          echo "$PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+          ssh -i private_key.pem ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'echo "This is a text file" > /home/ubuntu/new_file.txt'
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+
