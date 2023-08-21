@@ -1,0 +1,15 @@
+name: Run a command on an EC2 instance
+on:
+  push:
+    branches:
+      - master
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate
+        run: |
+          ssh -i ${{ secrets.SSH_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com
+      - name: Run a command
+        run: |
+          echo "Hello from the EC2 instance!"
