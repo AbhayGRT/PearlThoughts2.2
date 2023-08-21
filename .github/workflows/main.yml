@@ -1,15 +1,23 @@
-name: Run a command on an EC2 instance
+name: SSH Action
+
 on:
   push:
     branches:
-      - master
+      - main  # Adjust as needed
+
 jobs:
-  run:
+  ssh-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Authenticate
-        run: |
-          ssh -i ${{ secrets.SSH_KEY }} ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com
-      - name: Run a command
-        run: |
-          echo "Hello from the EC2 instance!"
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Configure SSH
+      uses: webfactory/ssh-agent@v0.5.2
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-key-name: "github-actions-key"  # Replace with your chosen identifier
+
+    - name: Run remote command
+      run: ssh ${{ secrets.SSH_USERNAME }} "echo Hello from remote server"
