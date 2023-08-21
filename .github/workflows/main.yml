@@ -19,6 +19,9 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key.pem
           chmod 600 ~/.ssh/deploy_key.pem
 
+      - name: Add EC2 Host Key to Known Hosts
+        run: ssh-keyscan -H ec2-3-108-61-131.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+
       - name: Change Working Directory
         run: cd $GITHUB_WORKSPACE
 
