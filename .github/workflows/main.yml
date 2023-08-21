@@ -1,22 +1,20 @@
-name: Create a text file in EC2 instance
-on:
-  push:
-    branches:
-      - main
+name: SSH into AWS Instance
+
+on: [push]
 
 jobs:
-  run:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create text file on EC2 instance
-        run: |
-          echo "$PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
-          ssh -i private_key.pem ubuntu@ec2-3-108-61-131.ap-south-1.compute.amazonaws.com 'echo "This is a text file" > /home/ubuntu/new_file.txt'
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
 
+      - name: SSH into AWS Instance
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-39-242 'ls -l'
